@@ -13,6 +13,9 @@ To use this application,
 2. put mongoDB info into dev.js file 
 3. Type  " npm install " inside the root directory  ( Download Server Dependencies ) 
 4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
++ gitpod.io 로 진행할시 credential 에러 대책
+1. google cloud 프로젝트 -> 사용자계정 -> 키 받음(json)
+2. bash # export GOOGLE_APPLICATION_CREDENTIALS=/workspace/chatbot-app/server/global-sun.json 
 
 If you have problem, feel free to ask me ^^ 
 
