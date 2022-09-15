@@ -18,7 +18,7 @@ To use this application,
 2. bash # export GOOGLE_APPLICATION_CREDENTIALS=/workspace/chatbot-app/server/global-sun.json 
 3. git push에러: https://wotres.tistory.com/entry/Error-Permission-denied-publickey-github-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95
 ssh-keygen -> cat ~/.ssh/id_rsa.pub 복-> github/profile/settings에서 new ssh key -> 붙
-4. fatal: Not possible to fast-forward, aborting. 에러: git pull --rebase로 일단 해결
+4. fatal: Not possible to fast-forward, aborting. 에러: git pull --rebase로 일단 해결(https://mytory.net/2022/01/13/git-fatal-not-possible-to-fast-forward-aborting.html)
 
 If you have problem, feel free to ask me ^^ 
 
