@@ -16,6 +16,9 @@ To use this application,
 + gitpod.io 로 진행할시 credential 에러 대책
 1. google cloud 프로젝트 -> 사용자계정 -> 키 받음(json)
 2. bash # export GOOGLE_APPLICATION_CREDENTIALS=/workspace/chatbot-app/server/global-sun.json 
+3. git push에러: https://wotres.tistory.com/entry/Error-Permission-denied-publickey-github-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95
+ssh-keygen -> cat ~/.ssh/id_rsa.pub 복-> github/profile/settings에서 new ssh key -> 붙
+
 
 If you have problem, feel free to ask me ^^ 
 
