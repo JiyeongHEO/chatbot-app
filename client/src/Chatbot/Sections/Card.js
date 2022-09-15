@@ -3,6 +3,7 @@ import { Card, Icon } from 'antd';
 
 const { Meta } = Card;
 
+//10. 카드가 3개라서.. //
 function CardComponent(props) {
     return (
         <Card

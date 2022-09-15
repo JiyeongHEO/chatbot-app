@@ -18,45 +18,45 @@ const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 // We will make two routes 
 
 
-// Text Query Route
+//1.// Text Query Route
 
 router.post('/textQuery', async (req, res) => {
     //We need to send some information that comes from the client to Dialogflow API 
-    // The text query request.
+    // dialogflowAPI에서 코드복붙
     const request = {
         session: sessionPath,
         queryInput: {
             text: {
                 // The query to send to the dialogflow agent
-                text: req.body.text,
+                text: req.body.text,  //내가보낸글. bodyParser 가함.
                 // The language used by the client (en-US)
                 languageCode: languageCode,
             },
         },
     };
 
-    // Send request and log result
+    // 서버로보냄
     const responses = await sessionClient.detectIntent(request);
     console.log('Detected intent');
     const result = responses[0].queryResult;
     console.log(`  Query: ${result.queryText}`);
     console.log(`  Response: ${result.fulfillmentText}`);
 
-    res.send(result)
+    res.send(result) 
 })
 
 
 
-//Event Query Route
+//2.// Event Query Route (1에서 복붙)
 
-router.post('/eventQuery', async (req, res) => {
+router.post('/eventQuery', async (req, res) => {  //엔드포인트:eventQuery
     //We need to send some information that comes from the client to Dialogflow API 
     // The text query request.
     const request = {
         session: sessionPath,
         queryInput: {
             event: {
-                // The query to send to the dialogflow agent
+                // 바꿈
                 name: req.body.event,
                 // The language used by the client (en-US)
                 languageCode: languageCode,

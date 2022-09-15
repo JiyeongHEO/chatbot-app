@@ -5,20 +5,18 @@ import { saveMessage } from '../_actions/message_actions';
 import Message from './Sections/Message';
 import { List, Icon, Avatar } from 'antd';
 import Card from "./Sections/Card";
+
+
 function Chatbot() {
     const dispatch = useDispatch();
-    const messagesFromRedux = useSelector(state => state.message.messages)
+    const messagesFromRedux = useSelector(state => state.message.messages) //8.//
 
-    useEffect(() => {
-
-        eventQuery('welcomeToMyWebsite')
-
+    useEffect(() => { //사이트들어올때마다 실행.트리거.dialogFlow Indent임
+        eventQuery('welcometoMyChatbot') //7.//
     }, [])
 
-
     const textQuery = async (text) => {
-
-        //  First  Need to  take care of the message I sent     
+        //첫번쨰    
         let conversation = {
             who: 'user',
             content: {
@@ -29,53 +27,44 @@ function Chatbot() {
         }
 
         dispatch(saveMessage(conversation))
-        // console.log('text I sent', conversation)
+         console.log('text I sent', conversation)
 
-        // We need to take care of the message Chatbot sent 
+        //두번쨰 
         const textQueryVariables = {
             text
         }
         try {
-            //I will send request to the textQuery ROUTE 
+            //라우터로...
             const response = await Axios.post('/api/dialogflow/textQuery', textQueryVariables)
-
-            for (let content of response.data.fulfillmentMessages) {
-
+            for (let content of response.data.fulfillmentMessages) { //첫번쨰와같은양식, response부분
                 conversation = {
                     who: 'bot',
                     content: content
                 }
-
                 dispatch(saveMessage(conversation))
             }
-
-
         } catch (error) {
             conversation = {
                 who: 'bot',
                 content: {
                     text: {
-                        text: " Error just occured, please check the problem"
-                    }
+                        text: "😢 Error from TextQuery 😢"
+                    } 
                 }
             }
-
             dispatch(saveMessage(conversation))
-
-
         }
-
     }
 
 
     const eventQuery = async (event) => {
 
-        // We need to take care of the message Chatbot sent 
+        // conversaion필요업고..
         const eventQueryVariables = {
             event
         }
         try {
-            //I will send request to the textQuery ROUTE 
+            //라우터로보냄
             const response = await Axios.post('/api/dialogflow/eventQuery', eventQueryVariables)
             for (let content of response.data.fulfillmentMessages) {
 
@@ -86,7 +75,6 @@ function Chatbot() {
 
                 dispatch(saveMessage(conversation))
             }
-
 
         } catch (error) {
             let conversation = {
@@ -105,33 +93,30 @@ function Chatbot() {
 
     const keyPressHanlder = (e) => {
         if (e.key === "Enter") {
-
             if (!e.target.value) {
                 return alert('you need to type somthing first')
             }
-
-            //we will send request to text query route 
-            textQuery(e.target.value)
-
-
+            textQuery(e.target.value) //6.//라우터로보냄 
             e.target.value = "";
         }
     }
 
     const renderCards = (cards) => {
+        //10. 카드가 3개라서.. //
         return cards.map((card,i) => <Card key={i} cardInfo={card.structValue} />)
     }
 
 
-    const renderOneMessage = (message, i) => {
-        console.log('message', message)
+    const renderOneMessage = (message, i) => { //8.//
+        console.log('message', message,'~~', i)
 
-        // we need to give some condition here to separate message kinds 
 
-        // template for normal text 
+        // 보통txt로
         if (message.content && message.content.text && message.content.text.text) {
-            return <Message key={i} who={message.who} text={message.content.text.text} />
-        } else if (message.content && message.content.payload.fields.card) {
+            return <Message key={i} who={message.who} text={message.content.text.text} /> //9.// 
+        } 
+        // 카드로 응답
+        else if (message.content && message.content.payload.fields.card) {
 
             const AvatarSrc = message.who === 'bot' ? <Icon type="robot" /> : <Icon type="smile" />
 
@@ -140,47 +125,36 @@ function Chatbot() {
                     <List.Item.Meta
                         avatar={<Avatar icon={AvatarSrc} />}
                         title={message.who}
+                        //10. 카드가 3개라서..//
                         description={renderCards(message.content.payload.fields.card.listValue.values)}
                     />
                 </List.Item>
             </div>
         }
 
-
-
-
-
-
-        // template for card message 
-
-
-
+        
 
     }
 
-    const renderMessage = (returnedMessages) => {
+    const renderMessage = (returnedMessages) => { //8.//
 
         if (returnedMessages) {
             return returnedMessages.map((message, i) => {
-                return renderOneMessage(message, i);
+                return renderOneMessage(message, i); //8.// 
             })
         } else {
             return null;
         }
     }
 
-
+    //4.//
     return (
         <div style={{
             height: 700, width: 700,
             border: '3px solid black', borderRadius: '7px'
         }}>
             <div style={{ height: 644, width: '100%', overflow: 'auto' }}>
-
-
-                {renderMessage(messagesFromRedux)}
-
-
+                {renderMessage(messagesFromRedux)}   //8.//
             </div>
             <input
                 style={{
@@ -188,7 +162,7 @@ function Chatbot() {
                     borderRadius: '4px', padding: '5px', fontSize: '1rem'
                 }}
                 placeholder="Send a message..."
-                onKeyPress={keyPressHanlder}
+                onKeyPress={keyPressHanlder} //5.//
                 type="text"
             />
 
