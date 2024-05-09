@@ -11,5 +11,4 @@ const Opinion = mongoose.model('Opinion', opinionSchema);
 
 module.exports = { Opinion }
 
-
-abcdefg
+master-1 에서 작업함1111
