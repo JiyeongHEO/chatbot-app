@@ -13,3 +13,4 @@ module.exports = { Opinion }
 
 master-1 에서 작업함 666
 master-1 에서 작업함 777
+master-1 에서 작업함 888
