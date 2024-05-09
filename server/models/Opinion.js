@@ -10,3 +10,6 @@ const opinionSchema =  mongoose.Schema({
 const Opinion = mongoose.model('Opinion', opinionSchema);
 
 module.exports = { Opinion }
+
+
+abcdefg
